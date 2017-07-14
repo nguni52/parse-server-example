@@ -4,13 +4,13 @@ push: {
         {
             production: true,
             bundleId: 'com.seeein.Seeein',
-            pfx: './certs/DistributionCertificates.p12',
+            pfx: '/parse/certs/DistributionCertificates.p12',
             passphrase: 'Matiisetso.2013'
         },
         {
             production: false,
             bundleId: 'com.seeein.Seeein',
-            pfx: './certs/Certificates.p12',
+            pfx: '/parse/certs/Certificates.p12',
             passphrase: 'Matiisetso.2013'
         }
     ]
