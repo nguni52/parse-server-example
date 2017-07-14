@@ -25,7 +25,7 @@ var api = new ParseServer({
         {
             production: true,
             bundleId: 'com.seeein.Seeein',
-            pfx: './certs/DistributionCertificates.p12',
+            pfx: './certs/DistributionCertificates_Prod.p12',
             passphrase: 'Matiisetso.2013'
         },
         {
