@@ -19,6 +19,22 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+  },
+  push: {
+      ios: [
+          {
+              production: true,
+              bundleId: 'com.seeein.Seeein',
+              pfx: './certs/DistributionCertificates.p12',
+              passphrase: 'Matiisetso.2013'
+          },
+          {
+              production: false,
+              bundleId: 'com.seeein.Seeein',
+              pfx: './certs/Certificates.p12',
+              passphrase: 'Matiisetso.2013'
+          }
+      ]
   }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
@@ -26,6 +42,13 @@ var api = new ParseServer({
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var app = express();
+
+app.use(process.env.PARSE_MOUNT_PATH || '/parse', api, function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS,PATCH,POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    return next();
+});
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
